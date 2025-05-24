@@ -1,0 +1,164 @@
+definitions:
+  models.Content:
+    properties:
+      category:
+        type: string
+      engagement:
+        $ref: '#/definitions/models.Engagement'
+      id:
+        type: integer
+      idea_title:
+        type: string
+      platform:
+        type: string
+      publish_date:
+        type: string
+      status:
+        description: '"Idea", "Scheduled", "Posted"'
+        type: string
+    type: object
+  models.Engagement:
+    properties:
+      comments:
+        type: integer
+      likes:
+        type: integer
+      shares:
+        type: integer
+    type: object
+  models.ErrorResponse:
+    properties:
+      message:
+        type: string
+    type: object
+info:
+  contact: {}
+paths:
+  /contents:
+    get:
+      description: Get all content from dummy data
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Content'
+            type: array
+      summary: Get all content
+      tags:
+      - content
+    post:
+      consumes:
+      - application/json
+      description: Create a new content entry
+      parameters:
+      - description: Content data
+        in: body
+        name: content
+        required: true
+        schema:
+          $ref: '#/definitions/models.Content'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.Content'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ErrorResponse'
+      summary: Create new content
+      tags:
+      - content
+  /contents/{id}:
+    delete:
+      description: Delete content by ID
+      parameters:
+      - description: Content ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: No Content
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.ErrorResponse'
+      summary: Delete content by ID
+      tags:
+      - content
+    get:
+      description: Get content detail by ID
+      parameters:
+      - description: Content ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Content'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.ErrorResponse'
+      summary: Get content by ID
+      tags:
+      - content
+    put:
+      consumes:
+      - application/json
+      description: Update content by ID
+      parameters:
+      - description: Content ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Content data
+        in: body
+        name: content
+        required: true
+        schema:
+          $ref: '#/definitions/models.Content'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Content'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.ErrorResponse'
+      summary: Update existing content
+      tags:
+      - content
+swagger: "2.0"
