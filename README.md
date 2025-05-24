@@ -24,7 +24,7 @@ Proyek ini merupakan pengembangan dari versi konsol menjadi layanan web modern, 
 
 ### 1. Clone Repositori
 ```bash
-[git clone https://github.com/username/creator-hub-gin.git](https://github.com/Adamibnualfatahh/creator-hub-gin)
+git clone https://github.com/Adamibnualfatahh/creator-hub-gin.git
 cd creator-hub-gin
 ```
 
